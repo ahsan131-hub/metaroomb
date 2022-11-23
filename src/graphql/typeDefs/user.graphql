@@ -1,0 +1,40 @@
+##############
+## Types
+##############
+
+type User {
+  email: String
+  fName: String
+  lName: String
+}
+
+type getUserRes {
+  response: Response
+  user: User
+}
+
+##############
+## Input Types
+##############
+
+input userInput {
+  email: String
+  fName: String
+  lName: String
+}
+
+##############
+##  Queries
+##############
+
+type Query {
+  getUserByEmail(email: String): getUserRes
+}
+
+##############
+##  Mutations
+##############
+
+type Mutation {
+  createUser(user: userInput): Response
+}
