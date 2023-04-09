@@ -1,10 +1,8 @@
-import { IUser } from "../../../../Types";
-import userController from "../../../../controllers/user.controller";
-
-const createUser = async (parents: any, { user }: { user: IUser }, {}) => {
+import { UserController } from "../../../../db/users/user.controller";
+const createUser = async (parents: any, { user }: any, {}) => {
   console.log(user);
   try {
-    await userController.createUser(user);
+    await UserController.createUser(user);
     console.log("user created succsfully");
     return {
       status: 200,

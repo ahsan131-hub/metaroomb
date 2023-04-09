@@ -1,4 +1,4 @@
-import userController from "../../../../controllers/user.controller";
+import { UserController } from "../../../../db/users/user.controller";
 
 const getUserByEmail = async (
   parents: any,
@@ -6,10 +6,10 @@ const getUserByEmail = async (
   {}
 ) => {
   try {
-    const user = await userController.getUserByEmail(email);
+    const user = await UserController.getUserByEmail(email);
     console.log(user);
     return {
-      user: { fName: user?.fName, lName: user?.lName, email: user?.email },
+      user: user,
       response: {
         status: 200,
         message: "Query successfully!",

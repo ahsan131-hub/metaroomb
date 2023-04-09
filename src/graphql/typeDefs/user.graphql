@@ -6,6 +6,16 @@ type User {
   email: String
   fName: String
   lName: String
+  userName: String
+  phone: String
+  gender: String
+  dateOfBirth: String
+  isEmailVerified:Boolean
+  timezone: String
+  isPhoneVerified: Boolean  
+  registrationCompleted: Boolean
+  rating: Int
+  role: Role
 }
 
 type getUserRes {
@@ -21,8 +31,18 @@ input userInput {
   email: String
   fName: String
   lName: String
+  userName: String
+  password: String
+  phone: String
+  gender: String
+  dateOfBirth: String
+  timezone: String
+  role: Role
 }
-
+enum Role {
+  INSTRUCTOR,
+  STUDENT
+}
 ##############
 ##  Queries
 ##############

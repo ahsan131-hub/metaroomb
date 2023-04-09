@@ -1,0 +1,58 @@
+##############
+## Types
+##############
+
+type Course {
+  name: String
+  durationOfCourse: Float
+  courseContent: [String]
+  sessionTime: String
+  sessionMeetingId: String
+  teacherId: String
+  studentsEnrolled: [String]
+  courseEndDate: String
+  quizes: [String]
+  ratings: Float
+  studentLimit: Int
+  about: String
+  coverPhoto: String 
+  courseOutline: String
+}
+
+type getCourseResponse {
+  response: Response
+  course: Course
+}
+
+##############
+## Input Types
+##############
+
+input courseInput {
+  name: String
+  durationOfCourse: Float
+  sessionTime: String
+  sessionMeetingId: String
+  courseEndDate: String
+  subject: String
+  studentLimit: Int
+  about: String
+  coverPhoto: String 
+  courseOutline: String
+  
+}
+##############
+##  Queries
+##############
+
+type Query {
+  getCourse(id: String): getCourseResponse
+}
+
+##############
+##  Mutations
+##############
+
+type Mutation {
+  createCourse(course:courseInput): Response
+}

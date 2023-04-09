@@ -6,6 +6,7 @@ import resolvers from "./graphql/resolvers";
 import jwt from "jsonwebtoken";
 import connection from "./db/connection";
 dotenv.config();
+
 const server = new ApolloServer({
   typeDefs: loadFiles("**/typeDefs/*.{graphql,gql}"),
   resolvers,
