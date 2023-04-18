@@ -1,0 +1,42 @@
+##############
+## Types
+##############
+
+type Enrollment {
+  studentId: String
+  courseId: String
+  attendence: [String]
+  QuizsSubmitted: [String]
+  assignmentsSubmitted: [String]
+}
+
+type getEnrollmentsResponse {
+  response: Response
+  enrollments: [Enrollment]
+}
+
+##############
+## Input Types
+##############
+
+input EnrollmentInput {
+  name: String
+  
+}
+##############
+##  Queries
+##############
+
+type Query {
+  getAllEnrollments: getEnrollmentsResponse
+  getCourseEnrollments(id: String): getEnrollmentsResponse
+  getStudentEnrollments(id: String): getEnrollmentsResponse
+}
+
+##############
+##  Mutations
+##############
+
+# type Mutation {
+#   # createEnrollment(Enrollment:EnrollmentInput): Response
+# }

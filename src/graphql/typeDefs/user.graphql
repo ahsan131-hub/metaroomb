@@ -39,6 +39,18 @@ input userInput {
   timezone: String
   role: Role
 }
+
+input userUpdateInput {
+  fName: String
+  lName: String
+  userName: String
+  password: String
+  phone: String
+  gender: String
+  dateOfBirth: String
+  timezone: String
+  role: Role
+}
 enum Role {
   INSTRUCTOR,
   STUDENT
@@ -57,4 +69,6 @@ type Query {
 
 type Mutation {
   createUser(user: userInput): Response
+  updateUser(user: userUpdateInput): Response
+  enrollInCourse(studentId:String , courseId: String): Response
 }

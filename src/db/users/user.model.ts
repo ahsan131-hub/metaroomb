@@ -19,7 +19,7 @@ const schema = new Schema<IUser_d, UserModel, IUserMethods>(
     lName: String,
     userName: String,
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true, select: false },
+    password: { type: String, select: false },
     phone: { type: String, unique: true },
     gender: String,
     dateOfBirth: String,
@@ -37,20 +37,20 @@ const schema = new Schema<IUser_d, UserModel, IUserMethods>(
   { timestamps: true, strict: true }
 );
 
-schema.pre("save", async function (next) {
-  if (this.isModified("password")) {
-    this.password = await bcrypt.hash(this.password, 10);
-  }
-  next();
-});
+// schema.pre("save", async function (next) {
+//   if (this.isModified("password")) {
+//     this.password = await bcrypt.hash(this.password, 10);
+//   }
+//   next();
+// });
 
-schema.methods.isValidPassword = async function (password: string) {
-  const encryptedPass = (
-    await User.findOne({ email: this.email }).select("password")
-  )?.password as string;
-  const compare = bcrypt.compare(password, encryptedPass);
-  return compare;
-};
+// schema.methods.isValidPassword = async function (password: string) {
+//   const encryptedPass = (
+//     await User.findOne({ email: this.email }).select("password")
+//   )?.password as string;
+//   const compare = bcrypt.compare(password, encryptedPass);
+//   return compare;
+// };
 const User = model<IUser_d, UserModel>("User", schema);
 
 export default User;

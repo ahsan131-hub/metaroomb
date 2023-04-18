@@ -22,16 +22,13 @@ const server = new ApolloServer({
     console.log(error?.message);
   }
   const { url } = await startStandaloneServer(server, {
-    // context: async ({ req, res }) => {
-    //   const token = req.headers.authorization || "";
-    //   console.log(token);
-    //   const user = jwt.verify(
-    //     token,
-    //     process.env.JWT_SECRET || "OSrZC9Vrgoaknp4D0fLMU8ao8mZCz4Xw57GPzFz8Tk4="
-    //   );
-    //   console.log("user", user);
-    //   return { ahsan: "ahsan is blah blah" };
-    // },
+    context: async ({ req, res }) => {
+      const token = req.headers.authorization as string;
+      // console.log(token);
+      const user = jwt.verify(token, process.env.JWT_SECRET as string);
+      // console.log("user", user);
+      return { user };
+    },
     listen: { port: 4000 },
   });
 
