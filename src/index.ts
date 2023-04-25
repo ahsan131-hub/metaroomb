@@ -14,9 +14,8 @@ const server = new ApolloServer({
 
 (async () => {
   try {
-    await connection(
-      (process.env["DB_URL"] as string) || "mongodb://mongo:27017/metaroom"
-    );
+    console.log(process.env["MONGO_URL"]);
+    await connection(process.env["MONGO_URL"] as string);
     console.log("Database is connected successfully...");
   } catch (error: any) {
     console.log(error?.message);

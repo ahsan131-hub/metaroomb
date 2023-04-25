@@ -13,7 +13,7 @@ services:
     env_file: .env.local
     environment:
       - PORT=27017
-      - MONGO_URL=mongodb://localhost:27017/metaroom
+      - MONGO_URL=mongodb+srv://metaroom55:metaroom786@cluster0.9uytw03.mongodb.net/?retryWrites=true&w=majority  
     links:
           - mongo
     depends_on:

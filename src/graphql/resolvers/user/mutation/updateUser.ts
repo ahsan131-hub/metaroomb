@@ -9,6 +9,26 @@ const updateUser = async (parents: any, { user }: any, context: any) => {
         message: "Not Authenticated!",
       };
     }
+    if (
+      !(
+        user.userName ||
+        user.fName ||
+        user.lName ||
+        user.timezone ||
+        user.dateOfBirth ||
+        user.gender ||
+        user.phone ||
+        user.role
+      )
+    ) {
+      return {
+        status: 404,
+        message: "Invalid User Data!",
+      };
+    }
+    user.registrationCompleted = true;
+    user.isEmailVerified = true;
+
     await UserController.updateUser(user, context.user.data.email);
     console.log("user created succsfully");
     return {
