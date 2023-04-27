@@ -2,7 +2,6 @@ import { UserController } from "../../../../db/users/user.controller";
 const updateUser = async (parents: any, { user }: any, context: any) => {
   console.log(user);
   try {
-    console.log("this is ", context.user.data);
     if (!user) {
       return {
         status: 404,
@@ -11,7 +10,6 @@ const updateUser = async (parents: any, { user }: any, context: any) => {
     }
     if (
       !(
-        user.userName ||
         user.fName ||
         user.lName ||
         user.timezone ||
@@ -26,6 +24,18 @@ const updateUser = async (parents: any, { user }: any, context: any) => {
         message: "Invalid User Data!",
       };
     }
+    if (user.userName) {
+      const userNameExist = await UserController.findUserByUsername(
+        user.userName
+      );
+      if (userNameExist) {
+        return {
+          status: 400,
+          message: "user already exists with username.",
+        };
+      }
+    }
+
     user.registrationCompleted = true;
     user.isEmailVerified = true;
 

@@ -8,7 +8,7 @@ type Course {
   courseContent: [String]
   sessionTime: String
   sessionMeetingId: String
-  teacherId: String
+  instructorId: String
   studentsEnrolled: [String]
   courseEndDate: String
   quizes: [String]
@@ -22,6 +22,11 @@ type Course {
 type getCourseResponse {
   response: Response
   course: Course
+}
+
+type coursesResponse {
+  response: Response
+  courses: [Course]
 }
 
 ##############
@@ -47,6 +52,7 @@ input courseInput {
 
 type Query {
   getCourse(id: String): getCourseResponse
+  getCourses: coursesResponse
 }
 
 ##############

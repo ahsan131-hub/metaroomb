@@ -6,7 +6,7 @@ export interface ICourse_d {
   courseContent: [string];
   sessionTime: string;
   sessionMeetingId: string;
-  teacherId: ObjectId;
+  instructorId: ObjectId;
   studentsEnrolled: [ObjectId];
   courseEndDate: string;
   quizes: [string];

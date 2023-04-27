@@ -21,6 +21,11 @@ const CourseController = {
   findCourseById: async (id: string) => {
     return await Course.findById(id);
   },
+
+  findAllCoursesOfUser: async (instructorId: string) => {
+    console.log(instructorId);
+    return await Course.find({ instructorId: instructorId });
+  },
   findAllCourses: async () => {
     return Course.find();
   },

@@ -11,7 +11,7 @@ const schema = new Schema<ICourse_d, CourseModel>(
     courseContent: [{ type: String }],
     sessionTime: String,
     sessionMeetingId: String,
-    teacherId: { type: mongoose.Types.ObjectId, ref: "User" },
+    instructorId: { type: mongoose.Types.ObjectId, ref: "User" },
     studentsEnrolled: [{ type: mongoose.Types.ObjectId, ref: "User" }],
     courseEndDate: String,
     // quizes: [{ type: ObjectId, ref: "Quiz" }],
