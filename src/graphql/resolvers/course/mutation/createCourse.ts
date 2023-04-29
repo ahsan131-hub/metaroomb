@@ -1,3 +1,4 @@
+import { randomUUID } from "crypto";
 import { CourseController } from "../../../../db/courses/course.controller";
 import { UserController } from "../../../../db/users/user.controller";
 
@@ -6,6 +7,7 @@ const createCourse = async (parents: any, { course }: any, { user }: any) => {
     if (!user.data.email) throw new Error("Unauthorized");
     const userData = await UserController.findUserByEmail(user.data.email);
     course.instructorId = userData!._id;
+    course.sessionMeetingId = randomUUID();
     await CourseController.createCourse(course);
     console.log("Course created succsfully");
     return {

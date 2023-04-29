@@ -15,6 +15,7 @@ const server = new ApolloServer({
 (async () => {
   try {
     console.log(process.env["MONGO_URL"]);
+
     await connection(process.env["MONGO_URL"] as string);
     console.log("Database is connected successfully...");
   } catch (error: any) {
