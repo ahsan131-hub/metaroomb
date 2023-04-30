@@ -30,6 +30,11 @@ type coursesResponse {
   courses: [Course]
 }
 
+type courseContentResponse {
+  response: Response
+  contents: [Content]
+}
+
 ##############
 ## Input Types
 ##############
@@ -54,6 +59,7 @@ input courseInput {
 type Query {
   getCourse(id: String): getCourseResponse
   getCourses: coursesResponse
+  getCourseContents(courseId:String):courseContentResponse
 }
 
 ##############
