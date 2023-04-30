@@ -17,7 +17,9 @@ const server = new ApolloServer({
   try {
     console.log(process.env["MONGO_URL"]);
 
-    await connection(process.env["MONGO_URL"] as string);
+    await connection(
+      "mongodb+srv://metaroom55:metaroom786@cluster0.9uytw03.mongodb.net/?retryWrites=true&w=majority"
+    );
     console.log("Database is connected successfully...");
   } catch (error: any) {
     console.log(error?.message);
