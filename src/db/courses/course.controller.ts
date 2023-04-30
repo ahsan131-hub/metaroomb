@@ -17,6 +17,15 @@ const CourseController = {
       { new: true }
     );
   },
+  addContentToCourse: (courseId: string, contentId: any) => {
+    return Course.findByIdAndUpdate(
+      courseId,
+      {
+        $push: { courseContent: contentId },
+      },
+      { new: true }
+    );
+  },
 
   findCourseById: async (id: string) => {
     return await Course.findById(id);

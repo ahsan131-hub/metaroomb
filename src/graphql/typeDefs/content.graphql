@@ -1,0 +1,52 @@
+##############
+## Types
+##############
+
+type Content {
+  id:String
+  name: String
+  deadline: String
+  description: String
+  contentFiles: [String]
+  instructorId: String
+  contentType: String
+  contentSubmissions: [String]
+}
+
+type getContentResponse {
+  response: Response
+  content: Content
+}
+
+type ContentsResponse {
+  response: Response
+  contents: [Content]
+}
+
+##############
+## Input Types
+##############
+
+input ContentInput {  
+  name: String
+  deadline: String
+  description: String
+  contentFiles: [String]
+  contentType: String
+}
+##############
+##  Queries
+##############
+
+type Query {
+  getContent(id: String): getContentResponse
+  getContents: ContentsResponse
+}
+
+##############
+##  Mutations
+##############
+
+type Mutation {
+  createContent(content:ContentInput,instructorId:String,courseId:String): Response
+}

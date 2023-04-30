@@ -15,10 +15,41 @@ export enum ROLES {
 
 const schema = new Schema<IUser_d, UserModel, IUserMethods>(
   {
-    fName: String,
-    lName: String,
-    userName: String,
-    email: { type: String, required: true, unique: true },
+    fName: {
+      type: String,
+
+      trim: true, // Removes leading/trailing whitespaces
+      minlength: 3,
+      maxlength: 50,
+    },
+    lName: {
+      type: String,
+
+      trim: true, // Removes leading/trailing whitespaces
+      minlength: 3,
+      maxlength: 50,
+    },
+    userName: {
+      type: String,
+      required: true,
+      trim: true, // Removes leading/trailing whitespaces
+      minlength: 3,
+      maxlength: 50,
+    },
+    email: {
+      required: true,
+      type: String,
+      unique: true,
+      trim: true,
+      lowercase: true,
+      validate: {
+        validator: (email: string) => {
+          // Validate email format using regular expression
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        },
+        message: "Invalid email format",
+      },
+    },
     password: { type: String, select: false },
     phone: { type: String, unique: true },
     gender: String,

@@ -3,10 +3,11 @@ import { UserController } from "../../../../db/users/user.controller";
 const enrollInCourse = async (
   parents: any,
   { studentId, courseId }: any,
-  {}
+  { user }: any
 ) => {
   try {
-    // TODO: Verify that user is logged in and is not already enrolled.
+    if (!user) throw new Error("Unauthorized");
+    if (user.data.email !== studentId) throw new Error("Unauthorized");
     await EnrollmentController.enroll(studentId, courseId);
     console.log("Course enrolled succsfully");
     return {
@@ -17,7 +18,7 @@ const enrollInCourse = async (
     console.log(error.message);
     return {
       status: 404,
-      message: "Course Enrolled Failed!",
+      message: error.message,
     };
   }
 };

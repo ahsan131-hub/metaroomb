@@ -1,14 +1,20 @@
-import { Schema, model, Model } from "mongoose";
+import { Schema, model, Model, Mongoose } from "mongoose";
 import { CourseModel, ICourse_d } from "./course.types";
 import bcrypt from "bcrypt";
 import { ObjectId } from "mongodb";
 import mongoose from "mongoose";
 const schema = new Schema<ICourse_d, CourseModel>(
   {
-    name: String,
+    name: {
+      type: String,
+      required: true,
+      trim: true, // Removes leading/trailing whitespaces
+      minlength: 3,
+      maxlength: 50,
+    },
     durationOfCourse: Number,
     // courseContent: [{ type: ObjectId, ref: "Content" }],
-    courseContent: [{ type: String }],
+    courseContent: [{ type: mongoose.Types.ObjectId, ref: "Content" }],
     sessionTime: String,
     sessionMeetingId: String,
     instructorId: { type: mongoose.Types.ObjectId, ref: "User" },

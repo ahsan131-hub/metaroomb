@@ -5,6 +5,7 @@ import { loadFiles } from "graphql-import-files";
 import resolvers from "./graphql/resolvers";
 import jwt from "jsonwebtoken";
 import connection from "./db/connection";
+import { verifyAuthorizationToken } from "./utils";
 dotenv.config();
 
 const server = new ApolloServer({
@@ -23,12 +24,14 @@ const server = new ApolloServer({
   }
   const { url } = await startStandaloneServer(server, {
     context: async ({ req, res }) => {
+      if (!req.headers.authorization) return "Unauthorized";
       const token = req.headers.authorization as string;
       // console.log(token);
-      const user = jwt.verify(token, process.env.JWT_SECRET as string);
-      // console.log("user", user);
+      const user = verifyAuthorizationToken(token);
+      console.log(user);
       return { user };
     },
+
     listen: { port: 4000 },
   });
 

@@ -45,6 +45,9 @@ const UserController = {
   findUserById: async (id: string) => {
     return await User.findById(id);
   },
+  exists: async (id: string) => {
+    return User.exists({ _id: id });
+  },
   getAllUsers: async () => {
     return User.find({}, [
       "fName",
