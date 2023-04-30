@@ -31,7 +31,7 @@ const schema = new Schema<IUser_d, UserModel, IUserMethods>(
     },
     userName: {
       type: String,
-      required: true,
+      // required: true,
       trim: true, // Removes leading/trailing whitespaces
       minlength: 3,
       maxlength: 50,

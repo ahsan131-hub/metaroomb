@@ -1,13 +1,12 @@
 import { CourseController } from "../../../../db/courses/course.controller";
 import { UserController } from "../../../../db/users/user.controller";
 
-const getCourses = async (parents: any, {}, context: any) => {
+const getCourses = async (parents: any, {}, { user }: any) => {
   try {
-    console.log("this is ", context.user.data.email);
-    if (!context.user.data.email) throw new Error("Unauthorized");
-    const user = await UserController.findUserByEmail(context.user.data.email);
+    if (!user) throw new Error("Unauthorized");
+    const existUser = await UserController.findUserByEmail(user.data.email);
     const courses = await CourseController.findAllCoursesOfUser(
-      user!._id.toString()
+      existUser!._id.toString()
     );
     return {
       courses: courses,
