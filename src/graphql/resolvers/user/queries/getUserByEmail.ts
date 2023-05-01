@@ -3,9 +3,10 @@ import { UserController } from "../../../../db/users/user.controller";
 const getUserByEmail = async (
   parents: any,
   { email }: { email: string },
-  {}
+  { context }: any
 ) => {
   try {
+    console.log(context);
     const user = await UserController.getUserByEmail(email);
     console.log(user);
     return {

@@ -10,7 +10,6 @@ const getCourseContents = async (
   try {
     if (!user.data.email) throw new Error("Unauthorized");
     const course = await CourseController.findCourseContents(courseId);
-    console.log(course);
     return {
       contents: course?.courseContent,
       response: {

@@ -3,7 +3,8 @@ import { UserController } from "../../../../db/users/user.controller";
 
 const getCourses = async (parents: any, {}, { user }: any) => {
   try {
-    if (!user) throw new Error("Unauthorized");
+    if (!user.data) throw new Error("Unauthorized");
+
     const existUser = await UserController.findUserByEmail(user.data.email);
     const courses = await CourseController.findAllCoursesOfUser(
       existUser!._id.toString()
@@ -18,7 +19,7 @@ const getCourses = async (parents: any, {}, { user }: any) => {
   } catch (error: any) {
     console.log(error.message);
     return {
-      courses: null,
+      courses: [],
       response: {
         status: 404,
         message: "Error: " + error.message + "!",

@@ -26,11 +26,10 @@ const server = new ApolloServer({
   }
   const { url } = await startStandaloneServer(server, {
     context: async ({ req, res }) => {
-      if (!req.headers.authorization) return "Unauthorized";
       const token = req.headers.authorization as string;
       // console.log(token);
-      const user = verifyAuthorizationToken(token);
-      console.log(user);
+      const user = jwt.verify(token, process.env.JWT_SECRET as string);
+      // console.log("user", user);
       return { user };
     },
 
