@@ -9,6 +9,7 @@ type User {
   userName: String
   phone: String
   gender: String
+  image: String
   dateOfBirth: String
   isEmailVerified:Boolean
   timezone: String
@@ -29,6 +30,7 @@ type getUserRes {
 
 input userInput {
   email: String
+  image: String
   fName: String
   lName: String
   userName: String
@@ -70,5 +72,5 @@ type Query {
 type Mutation {
   createUser(user: userInput): Response
   updateUser(user: userUpdateInput): Response
-  enrollInCourse(studentId:String , courseId: String): Response
+  enrollInCourse( studentEmail:String courseId: String): Response
 }

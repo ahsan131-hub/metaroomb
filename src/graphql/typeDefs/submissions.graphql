@@ -1,0 +1,72 @@
+##############
+## Types
+##############
+type Submission {
+  id: String
+  studentId: String
+  description: String
+  submissionType: String
+  instructorId: String 
+  courseId: String
+  quizId: String
+  submissionFiles:[String]
+  contentId: String
+  score: Float
+  checkedByInstructor: Boolean
+  quizQuestions: [AnswerQuestion]
+}
+type AnswerQuestion {
+  question: String
+  options: [String]
+  correctAnswer: String
+  studentAnswer: String
+}
+input InputAnswerQuestion {
+  question: String
+  options: [String]
+  correctAnswer: String
+  studentAnswer: String
+}
+
+type getSubmissionResponse {
+  response: Response
+  submission:Submission
+}
+
+type SubmissionsResponse {
+  response: Response
+  submissions: [Submission]
+}
+
+##############
+## Input Types
+##############
+
+input SubmissionInput {  
+  studentId: String
+  description: String
+  submissionType: String
+  instructorId: String 
+  courseId: String
+  quizId: String
+  submissionFiles:[String]
+  contentId: String
+  quizQuestions: [InputAnswerQuestion]
+}
+##############
+##  Queries
+##############
+
+type Query {
+  getSubmission(id: String): getSubmissionResponse
+  getSubmissions(courseId:String): SubmissionsResponse
+}
+
+##############
+##  Mutations
+##############
+
+type Mutation {
+  createSubmission(submission:SubmissionInput): Response
+  updateSubmissionScore(id: String, score:Float): Response
+}

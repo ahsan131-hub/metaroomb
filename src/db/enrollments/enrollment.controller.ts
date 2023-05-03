@@ -20,10 +20,13 @@ const EnrollmentController = {
   },
 
   findEnrollmentByStudentId: async (stdId: string) => {
-    return await Enrollment.find({ studentId: stdId });
+    return await Enrollment.find({ studentId: stdId }).populate("courseId");
   },
   findAllByCourseId: async (courseId: string) => {
     return await Enrollment.find({ courseId });
+  },
+  alreadEnrolled: async (studentId: string, courseId: string) => {
+    return await Enrollment.exists({ studentId, courseId });
   },
   findAllEnrollments: async () => {
     return Enrollment.find();

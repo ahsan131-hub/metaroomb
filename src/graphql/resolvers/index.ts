@@ -6,6 +6,8 @@ import enrollmentQuries from "./enrollment/queries";
 import enrollmentMutations from "./enrollment/mutation";
 import contentMutations from "./content/mutation";
 import contentQuries from "./content/queries";
+import SubmissionMutations from "./submission/mutation";
+import SubmissionQuries from "./submission/queries";
 
 const resolvers = {
   Mutation: {
@@ -13,12 +15,14 @@ const resolvers = {
     ...courseMutations,
     ...enrollmentMutations,
     ...contentMutations,
+    ...SubmissionMutations,
   },
   Query: {
     ...userQuery,
     ...courseQuries,
     ...enrollmentQuries,
     ...contentQuries,
+    ...SubmissionQuries,
   },
 };
 export default resolvers;

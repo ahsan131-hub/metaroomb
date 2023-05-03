@@ -29,12 +29,17 @@ const schema = new Schema<IUser_d, UserModel, IUserMethods>(
       minlength: 3,
       maxlength: 50,
     },
+
     userName: {
       type: String,
       // required: true,
       trim: true, // Removes leading/trailing whitespaces
       minlength: 3,
       maxlength: 50,
+    },
+    image: {
+      type: String,
+      default: "",
     },
     email: {
       required: true,

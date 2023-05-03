@@ -2,13 +2,19 @@ import { EnrollmentController } from "../../../../db/enrollments/enrollment.cont
 import { UserController } from "../../../../db/users/user.controller";
 const enrollInCourse = async (
   parents: any,
-  { studentId, courseId }: any,
+  { studentEmail, courseId }: any,
   { user }: any
 ) => {
   try {
-    if (!user) throw new Error("Unauthorized");
-    if (user.data.email !== studentId) throw new Error("Unauthorized");
-    await EnrollmentController.enroll(studentId, courseId);
+    if (user.data.email !== studentEmail) throw new Error("Unauthorized");
+    const userData = await UserController.findUserByEmail(user.data.email);
+
+    const exist = await EnrollmentController.alreadEnrolled(
+      userData!._id.toString(),
+      courseId
+    );
+    if (exist?._id) throw new Error("Already enrolled");
+    await EnrollmentController.enroll(userData!._id.toString(), courseId);
     console.log("Course enrolled succsfully");
     return {
       status: 200,
