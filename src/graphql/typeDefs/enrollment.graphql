@@ -3,8 +3,8 @@
 ##############
 
 type Enrollment {
-  studentId: String
-  courseId: String
+  studentId: User
+  courseId: Course
   attendence: [String]
   QuizsSubmitted: [String]
   assignmentsSubmitted: [String]
@@ -21,7 +21,6 @@ type getEnrollmentsResponse {
 
 input EnrollmentInput {
   name: String
-  
 }
 ##############
 ##  Queries
@@ -29,7 +28,7 @@ input EnrollmentInput {
 
 type Query {
   getAllEnrollments: getEnrollmentsResponse
-  getCourseEnrollments(id: String): getEnrollmentsResponse
+  getCourseEnrollments(courseId: String): getEnrollmentsResponse
   getStudentEnrollments(id: String): getEnrollmentsResponse
 }
 

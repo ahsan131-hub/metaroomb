@@ -22,14 +22,16 @@ const EnrollmentController = {
   findEnrollmentByStudentId: async (stdId: string) => {
     return await Enrollment.find({ studentId: stdId }).populate("courseId");
   },
-  findAllByCourseId: async (courseId: string) => {
-    return await Enrollment.find({ courseId });
+  findAllByCourseId: (courseId: string) => {
+    return Enrollment.find({ courseId })
+      .populate("courseId")
+      .populate("studentId");
   },
   alreadEnrolled: async (studentId: string, courseId: string) => {
     return await Enrollment.exists({ studentId, courseId });
   },
   findAllEnrollments: async () => {
-    return Enrollment.find();
+    return Enrollment.find().populate("courseId").populate("studentId");
   },
 };
 export { EnrollmentController };

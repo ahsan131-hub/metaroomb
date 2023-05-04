@@ -6,7 +6,14 @@ const getCourseEnrollments = async (
   {}
 ) => {
   try {
+    console.log(courseId);
+    if (!courseId) {
+      throw new Error("CourseId is required!");
+    }
+    console.log(courseId);
     const enrollments = await EnrollmentController.findAllByCourseId(courseId);
+
+    console.log(enrollments);
     return {
       enrollments: enrollments,
       response: {
@@ -14,12 +21,12 @@ const getCourseEnrollments = async (
         message: "Query successfully!",
       },
     };
-  } catch (error) {
+  } catch (error: any) {
     return {
       Enrollment: null,
       response: {
         status: 404,
-        message: "Query failed!",
+        message: error.message,
       },
     };
   }
