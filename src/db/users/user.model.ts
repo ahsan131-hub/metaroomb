@@ -11,6 +11,7 @@ export enum VERIFICATION_STATUS {
 export enum ROLES {
   INSTRUCTOR = "INSTRUCTOR",
   STUDENT = "STUDENT",
+  ADMIN = "ADMIN",
 }
 
 const schema = new Schema<IUser_d, UserModel, IUserMethods>(
@@ -66,7 +67,7 @@ const schema = new Schema<IUser_d, UserModel, IUserMethods>(
     rating: { type: Number, default: 0 },
     role: {
       type: String,
-      enum: [ROLES.INSTRUCTOR, ROLES.STUDENT],
+      enum: [ROLES.INSTRUCTOR, ROLES.STUDENT, ROLES.ADMIN],
       default: ROLES.STUDENT,
     },
   },

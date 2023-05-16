@@ -1,11 +1,7 @@
 import { EnrollmentController } from "../../../../db/enrollments/enrollment.controller";
 import { UserController } from "../../../../db/users/user.controller";
 
-const getStudentEnrollments = async (
-  parents: any,
-  { studentId }: { studentId: string },
-  { user }: any
-) => {
+const getStudentEnrollments = async (parents: any, {}: {}, { user }: any) => {
   try {
     if (!user.data) throw new Error("Unauthorized");
 
@@ -13,6 +9,7 @@ const getStudentEnrollments = async (
     const enrollments = await EnrollmentController.findEnrollmentByStudentId(
       existUser?.id.toString()
     );
+
     console.log(enrollments);
     return {
       enrollments: enrollments,

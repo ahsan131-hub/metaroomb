@@ -43,7 +43,7 @@ const updateUser = async (parents: any, { user }: any, context: any) => {
     console.log("user created succsfully");
     return {
       status: 200,
-      message: "User created succsfully!",
+      message: "User Updated succesfully!",
     };
   } catch (error: any) {
     console.log(error.message);

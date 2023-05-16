@@ -44,5 +44,8 @@ const CourseController = {
   findCourseContents: async (courseId: string) => {
     return Course.findById(courseId).populate("courseContent");
   },
+  countCourses: async () => {
+    return Course.count();
+  },
 };
 export { CourseController };

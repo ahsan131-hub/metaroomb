@@ -29,7 +29,7 @@ input EnrollmentInput {
 type Query {
   getAllEnrollments: getEnrollmentsResponse
   getCourseEnrollments(courseId: String): getEnrollmentsResponse
-  getStudentEnrollments(id: String): getEnrollmentsResponse
+  getStudentEnrollments: getEnrollmentsResponse
 }
 
 ##############

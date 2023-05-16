@@ -33,5 +33,8 @@ const EnrollmentController = {
   findAllEnrollments: async () => {
     return Enrollment.find().populate("courseId").populate("studentId");
   },
+  countEnrollments: async () => {
+    return Enrollment.count();
+  },
 };
 export { EnrollmentController };

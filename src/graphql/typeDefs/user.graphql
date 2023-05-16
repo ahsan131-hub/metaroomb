@@ -23,6 +23,18 @@ type getUserRes {
   response: Response
   user: User
 }
+type getStatisticsRes {
+  response: Response
+  statistics:Statistics
+}
+type Statistics {
+  totalUsers: Int
+  totalInstructors: Int
+  totalStudents: Int
+  totalCourses: Int
+  totalEnrollments:Int
+  totalRevenue:String
+}
 
 ##############
 ## Input Types
@@ -54,7 +66,8 @@ input userUpdateInput {
   role: Role
 }
 enum Role {
-  INSTRUCTOR,
+  INSTRUCTOR
+  ADMIN
   STUDENT
 }
 ##############
@@ -63,6 +76,7 @@ enum Role {
 
 type Query {
   getUserByEmail(email: String): getUserRes
+  getStatistics: getStatisticsRes
 }
 
 ##############

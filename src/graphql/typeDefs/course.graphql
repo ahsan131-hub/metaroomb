@@ -60,6 +60,7 @@ type Query {
   getCourse(id: String): getCourseResponse
   getCourses: coursesResponse
   getCourseContents(courseId:String):courseContentResponse
+  findAllCourses: coursesResponse
 }
 
 ##############

@@ -1,4 +1,4 @@
-import User, { VERIFICATION_STATUS } from "./user.model";
+import User, { ROLES, VERIFICATION_STATUS } from "./user.model";
 import { IUser_d } from "./user.types";
 
 const UserController = {
@@ -17,7 +17,6 @@ const UserController = {
       { new: true }
     );
   },
-
   updateOtpVerify: (email: string) => {
     return User.findOneAndUpdate(
       { email: email },
@@ -58,12 +57,20 @@ const UserController = {
       "timezone",
     ]);
   },
-
   findUserByUsername: (userName: string) => {
     return User.findOne({ userName });
   },
   findUserByEmail: (email: string) => {
     return User.findOne({ email });
+  },
+  countUsers: () => {
+    return User.count();
+  },
+  countInstructors: () => {
+    return User.count({ role: ROLES.INSTRUCTOR });
+  },
+  countStudents: () => {
+    return User.count({ role: ROLES.STUDENT });
   },
 };
 export { UserController };
