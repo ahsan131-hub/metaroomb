@@ -57,7 +57,7 @@ const schema = new Schema<IUser_d, UserModel, IUserMethods>(
       },
     },
     password: { type: String, select: false },
-    phone: { type: String, unique: true },
+    phone: { type: String },
     gender: String,
     dateOfBirth: String,
     isEmailVerified: { type: Boolean, default: false },
