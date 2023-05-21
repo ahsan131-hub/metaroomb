@@ -28,11 +28,11 @@ const SubmissionController = {
   },
 
   findSubmissionById: async (id: string) => {
-    return await Submission.findById(id);
+    return Submission.findById(id);
   },
 
   findAllSubmissionsOfCourse: async (courseId: string) => {
-    return await Submission.find({ courseId: courseId });
+    return await Submission.find({ courseId: courseId }).populate("studentId");
   },
   findAllSubmissions: async () => {
     return Submission.find();

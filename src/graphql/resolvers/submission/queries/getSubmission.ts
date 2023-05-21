@@ -3,9 +3,9 @@ import { SubmissionController } from "../../../../db/submissions/submissions.con
 
 const getSubmission = async (parents: any, { id }: { id: string }, {}) => {
   try {
-    const Submission = await SubmissionController.findSubmissionById(id);
+    const submission = await SubmissionController.findSubmissionById(id);
     return {
-      Submission: Submission,
+      submission,
       response: {
         status: 200,
         message: "Query successfully!",
