@@ -42,7 +42,7 @@ const server = new server_1.ApolloServer({
             // console.log("user", user);
             return { user };
         }),
-        listen: { port: 4000 },
+        listen: { port: 8000 },
     });
     console.log(`🚀  Server ready at: ${url}`);
 }))();
