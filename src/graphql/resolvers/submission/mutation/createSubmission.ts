@@ -11,6 +11,9 @@ const createSubmission = async (
 ) => {
   try {
     if (!user) throw new Error("Unauthorized");
+    if (!user.data.email) throw new Error("Unauthorized");
+    const userData = await UserController.findUserByEmail(user.data.email);
+    submission.studentId = userData!._id;
     await SubmissionController.createSubmission(submission);
     console.log("Submission created succsfully");
     return {

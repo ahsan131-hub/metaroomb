@@ -11,13 +11,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const course_controller_1 = require("../../../../db/courses/course.controller");
 const user_controller_1 = require("../../../../db/users/user.controller");
-const getCourses = (parents, {}, context) => __awaiter(void 0, void 0, void 0, function* () {
+const getCourses = (parents, {}, { user }) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log("this is ", context.user.data.email);
-        if (!context.user.data.email)
+        if (!user.data)
             throw new Error("Unauthorized");
-        const user = yield user_controller_1.UserController.findUserByEmail(context.user.data.email);
-        const courses = yield course_controller_1.CourseController.findAllCoursesOfUser(user._id.toString());
+        const existUser = yield user_controller_1.UserController.findUserByEmail(user.data.email);
+        const courses = yield course_controller_1.CourseController.findAllCoursesOfUser(existUser._id.toString());
         return {
             courses: courses,
             response: {
@@ -29,7 +28,7 @@ const getCourses = (parents, {}, context) => __awaiter(void 0, void 0, void 0, f
     catch (error) {
         console.log(error.message);
         return {
-            courses: null,
+            courses: [],
             response: {
                 status: 404,
                 message: "Error: " + error.message + "!",

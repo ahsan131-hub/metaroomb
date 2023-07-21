@@ -4,6 +4,7 @@ import { UserController } from "../../../../db/users/user.controller";
 const findAllCourses = async (parents: any, {}, {}: any) => {
   try {
     const courses = await CourseController.findAllCourses();
+    console.log(courses)
     return {
       courses: courses,
       response: {

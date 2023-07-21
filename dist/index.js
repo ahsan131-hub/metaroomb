@@ -23,11 +23,11 @@ dotenv_1.default.config();
 const server = new server_1.ApolloServer({
     typeDefs: (0, graphql_import_files_1.loadFiles)("**/typeDefs/*.{graphql,gql}"),
     resolvers: resolvers_1.default,
+    nodeEnv: "development"
 });
 (() => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log(process.env["MONGO_URL"]);
-        yield (0, connection_1.default)(process.env["MONGO_URL"]);
+        yield (0, connection_1.default)("mongodb+srv://metaroom55:metaroom786@cluster0.9uytw03.mongodb.net/?retryWrites=true&w=majority");
         console.log("Database is connected successfully...");
     }
     catch (error) {
@@ -36,8 +36,9 @@ const server = new server_1.ApolloServer({
     const { url } = yield (0, standalone_1.startStandaloneServer)(server, {
         context: ({ req, res }) => __awaiter(void 0, void 0, void 0, function* () {
             const token = req.headers.authorization;
-            // console.log(token);
+            console.log(token);
             const user = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
+            console.log(token);
             // console.log("user", user);
             return { user };
         }),

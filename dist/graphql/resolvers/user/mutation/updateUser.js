@@ -46,7 +46,7 @@ const updateUser = (parents, { user }, context) => __awaiter(void 0, void 0, voi
         console.log("user created succsfully");
         return {
             status: 200,
-            message: "User created succsfully!",
+            message: "User Updated succesfully!",
         };
     }
     catch (error) {

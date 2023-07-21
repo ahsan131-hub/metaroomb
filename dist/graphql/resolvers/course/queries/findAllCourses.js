@@ -9,17 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const enrollment_controller_1 = require("../../../../db/enrollments/enrollment.controller");
-const user_controller_1 = require("../../../../db/users/user.controller");
-const getStudentEnrollments = (parents, {}, { user }) => __awaiter(void 0, void 0, void 0, function* () {
+const course_controller_1 = require("../../../../db/courses/course.controller");
+const findAllCourses = (parents, {}, {}) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        if (!user.data)
-            throw new Error("Unauthorized");
-        const existUser = yield user_controller_1.UserController.findUserByEmail(user.data.email);
-        const enrollments = yield enrollment_controller_1.EnrollmentController.findEnrollmentByStudentId(existUser === null || existUser === void 0 ? void 0 : existUser.id.toString());
-        console.log(enrollments);
+        const courses = yield course_controller_1.CourseController.findAllCourses();
+        console.log(courses);
         return {
-            enrollments: enrollments,
+            courses: courses,
             response: {
                 status: 200,
                 message: "Query successfully!",
@@ -27,13 +23,14 @@ const getStudentEnrollments = (parents, {}, { user }) => __awaiter(void 0, void 
         };
     }
     catch (error) {
+        console.log(error.message);
         return {
-            Enrollment: null,
+            courses: [],
             response: {
                 status: 404,
-                message: "Query failed!",
+                message: "Error: " + error.message + "!",
             },
         };
     }
 });
-exports.default = getStudentEnrollments;
+exports.default = findAllCourses;

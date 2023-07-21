@@ -28,13 +28,21 @@ const EnrollmentController = {
         }, { new: true });
     },
     findEnrollmentByStudentId: (stdId) => __awaiter(void 0, void 0, void 0, function* () {
-        return yield enrollment_model_1.default.find({ studentId: stdId });
+        return yield enrollment_model_1.default.find({ studentId: stdId }).populate("courseId");
     }),
-    findAllByCourseId: (courseId) => __awaiter(void 0, void 0, void 0, function* () {
-        return yield enrollment_model_1.default.find({ courseId });
+    findAllByCourseId: (courseId) => {
+        return enrollment_model_1.default.find({ courseId })
+            .populate("courseId")
+            .populate("studentId");
+    },
+    alreadEnrolled: (studentId, courseId) => __awaiter(void 0, void 0, void 0, function* () {
+        return yield enrollment_model_1.default.exists({ studentId, courseId });
     }),
     findAllEnrollments: () => __awaiter(void 0, void 0, void 0, function* () {
-        return enrollment_model_1.default.find();
+        return enrollment_model_1.default.find().populate("courseId").populate("studentId");
+    }),
+    countEnrollments: () => __awaiter(void 0, void 0, void 0, function* () {
+        return enrollment_model_1.default.count();
     }),
 };
 exports.EnrollmentController = EnrollmentController;

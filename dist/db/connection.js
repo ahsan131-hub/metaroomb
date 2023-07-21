@@ -15,6 +15,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 // mongodb connection
 exports.default = (url) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(url);
     return yield mongoose_1.default.connect(url);
 });

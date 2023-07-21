@@ -1,4 +1,5 @@
 import { UserController } from "../../../../db/users/user.controller";
+
 const updateUser = async (parents: any, { user }: any, context: any) => {
   console.log(user);
   try {

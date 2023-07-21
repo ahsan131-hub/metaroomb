@@ -12,7 +12,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const enrollment_controller_1 = require("../../../../db/enrollments/enrollment.controller");
 const getCourseEnrollments = (parents, { courseId }, {}) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        console.log(courseId);
+        if (!courseId) {
+            throw new Error("CourseId is required!");
+        }
+        console.log(courseId);
         const enrollments = yield enrollment_controller_1.EnrollmentController.findAllByCourseId(courseId);
+        console.log(enrollments);
         return {
             enrollments: enrollments,
             response: {
@@ -26,7 +32,7 @@ const getCourseEnrollments = (parents, { courseId }, {}) => __awaiter(void 0, vo
             Enrollment: null,
             response: {
                 status: 404,
-                message: "Query failed!",
+                message: error.message,
             },
         };
     }

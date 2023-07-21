@@ -26,6 +26,11 @@ const CourseController = {
             $set: Object.assign({}, CourseData),
         }, { new: true });
     },
+    addContentToCourse: (courseId, contentId) => {
+        return course_model_1.default.findByIdAndUpdate(courseId, {
+            $push: { courseContent: contentId },
+        }, { new: true });
+    },
     findCourseById: (id) => __awaiter(void 0, void 0, void 0, function* () {
         return yield course_model_1.default.findById(id);
     }),
@@ -33,8 +38,17 @@ const CourseController = {
         console.log(instructorId);
         return yield course_model_1.default.find({ instructorId: instructorId });
     }),
+    // findEnrolledCourse: async (studentId: string) => {
+    //   return await Course.find({ instructorId: instructorId });
+    // },
     findAllCourses: () => __awaiter(void 0, void 0, void 0, function* () {
         return course_model_1.default.find();
+    }),
+    findCourseContents: (courseId) => __awaiter(void 0, void 0, void 0, function* () {
+        return course_model_1.default.findById(courseId).populate("courseContent");
+    }),
+    countCourses: () => __awaiter(void 0, void 0, void 0, function* () {
+        return course_model_1.default.count();
     }),
 };
 exports.CourseController = CourseController;

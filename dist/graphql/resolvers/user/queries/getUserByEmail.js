@@ -10,8 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const user_controller_1 = require("../../../../db/users/user.controller");
-const getUserByEmail = (parents, { email }, {}) => __awaiter(void 0, void 0, void 0, function* () {
+const getUserByEmail = (parents, { email }, { context }) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        console.log(context);
         const user = yield user_controller_1.UserController.getUserByEmail(email);
         console.log(user);
         return {

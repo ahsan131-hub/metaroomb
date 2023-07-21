@@ -13,6 +13,12 @@ const user_controller_1 = require("../../../../db/users/user.controller");
 const createUser = (parents, { user }, {}) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(user);
     try {
+        const exists = yield user_controller_1.UserController.findUserByEmail(user.email);
+        if (exists)
+            return {
+                status: 200,
+                message: "User already exists!",
+            };
         yield user_controller_1.UserController.createUser(user);
         console.log("user created succsfully");
         return {

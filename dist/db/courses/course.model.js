@@ -6,10 +6,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
 const mongoose_2 = __importDefault(require("mongoose"));
 const schema = new mongoose_1.Schema({
-    name: String,
+    name: {
+        type: String,
+        required: true,
+        trim: true,
+        minlength: 3,
+        maxlength: 50,
+    },
     durationOfCourse: Number,
     // courseContent: [{ type: ObjectId, ref: "Content" }],
-    courseContent: [{ type: String }],
+    courseContent: [{ type: mongoose_2.default.Types.ObjectId, ref: "Content" }],
     sessionTime: String,
     sessionMeetingId: String,
     instructorId: { type: mongoose_2.default.Types.ObjectId, ref: "User" },

@@ -9,29 +9,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const enrollment_controller_1 = require("../../../../db/enrollments/enrollment.controller");
-const user_controller_1 = require("../../../../db/users/user.controller");
-const enrollInCourse = (parents, { studentEmail, courseId }, { user }) => __awaiter(void 0, void 0, void 0, function* () {
+const submissions_controller_1 = require("../../../../db/submissions/submissions.controller");
+const updateSubmissionScore = (parents, { id, score }, { user }) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        if (user.data.email !== studentEmail)
+        if (!user)
             throw new Error("Unauthorized");
-        const userData = yield user_controller_1.UserController.findUserByEmail(user.data.email);
-        const exist = yield enrollment_controller_1.EnrollmentController.alreadEnrolled(userData._id.toString(), courseId);
-        if (exist === null || exist === void 0 ? void 0 : exist._id)
-            throw new Error("Already enrolled");
-        yield enrollment_controller_1.EnrollmentController.enroll(userData._id.toString(), courseId);
-        console.log("Course enrolled succsfully");
+        yield submissions_controller_1.SubmissionController.updateSubmissionScore(id, score);
+        console.log("Submission updated succsfully");
         return {
             status: 200,
-            message: "Course Enrolled succsfully!",
+            message: "Submission updated succesfully!",
         };
     }
     catch (error) {
         console.log(error.message);
         return {
             status: 404,
-            message: error.message,
+            message: "Submission updation failed!",
         };
     }
 });
-exports.default = enrollInCourse;
+exports.default = updateSubmissionScore;

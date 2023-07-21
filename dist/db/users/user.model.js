@@ -13,14 +13,48 @@ var ROLES;
 (function (ROLES) {
     ROLES["INSTRUCTOR"] = "INSTRUCTOR";
     ROLES["STUDENT"] = "STUDENT";
+    ROLES["ADMIN"] = "ADMIN";
 })(ROLES = exports.ROLES || (exports.ROLES = {}));
 const schema = new mongoose_1.Schema({
-    fName: String,
-    lName: String,
-    userName: String,
-    email: { type: String, required: true, unique: true },
+    fName: {
+        type: String,
+        trim: true,
+        minlength: 3,
+        maxlength: 50,
+    },
+    lName: {
+        type: String,
+        trim: true,
+        minlength: 3,
+        maxlength: 50,
+    },
+    userName: {
+        type: String,
+        // required: true,
+        trim: true,
+        minlength: 3,
+        maxlength: 50,
+    },
+    image: {
+        type: String,
+        default: "",
+    },
+    email: {
+        required: true,
+        type: String,
+        unique: true,
+        trim: true,
+        lowercase: true,
+        validate: {
+            validator: (email) => {
+                // Validate email format using regular expression
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            },
+            message: "Invalid email format",
+        },
+    },
     password: { type: String, select: false },
-    phone: { type: String, unique: true },
+    phone: { type: String },
     gender: String,
     dateOfBirth: String,
     isEmailVerified: { type: Boolean, default: false },
@@ -30,7 +64,7 @@ const schema = new mongoose_1.Schema({
     rating: { type: Number, default: 0 },
     role: {
         type: String,
-        enum: [ROLES.INSTRUCTOR, ROLES.STUDENT],
+        enum: [ROLES.INSTRUCTOR, ROLES.STUDENT, ROLES.ADMIN],
         default: ROLES.STUDENT,
     },
 }, { timestamps: true, strict: true });
