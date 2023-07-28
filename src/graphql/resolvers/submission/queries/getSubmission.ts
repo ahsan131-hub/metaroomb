@@ -3,6 +3,7 @@ import { SubmissionController } from "../../../../db/submissions/submissions.con
 
 const getSubmission = async (parents: any, { id }: { id: string }, {}) => {
   try {
+    // find by
     const submission = await SubmissionController.findSubmissionById(id);
     return {
       submission,

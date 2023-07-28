@@ -30,6 +30,12 @@ const SubmissionController = {
   findSubmissionById: async (id: string) => {
     return Submission.findById(id).populate("studentId");
   },
+  findSubmissionByContentId: async (contentId: string,userId:string) => {
+    return Submission.findOne({contentId,studentId:userId}).populate("studentId");
+  },
+  findSubmissionsByStudentId: async (studentId: string,courseId:string) => {
+    return Submission.find({ studentId: studentId ,courseId:courseId}).populate("studentId");
+  },
 
   findAllSubmissionsOfCourse: async (courseId: string) => {
     return await Submission.find({ courseId: courseId }).populate("studentId");

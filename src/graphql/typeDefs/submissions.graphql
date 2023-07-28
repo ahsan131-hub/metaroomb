@@ -22,11 +22,12 @@ type AnswerQuestion {
   studentAnswer: String
 }
 input InputAnswerQuestion {
-  question: String
-  options: [String]
-  correctAnswer: String
+  question: String!
+  options: [String]!
+  correctAnswer: String!
   studentAnswer: String
 }
+
 
 type getSubmissionResponse {
   response: Response
@@ -51,6 +52,7 @@ input SubmissionInput {
   quizId: String
   submissionFiles:[String]
   contentId: String
+  score:Float
   quizQuestions: [InputAnswerQuestion]
 }
 ##############
@@ -59,7 +61,9 @@ input SubmissionInput {
 
 type Query {
   getSubmission(id: String): getSubmissionResponse
+  getSubmissionByContentId(contentId: String): getSubmissionResponse
   getSubmissions(courseId:String): SubmissionsResponse
+  getStudentSubmissions(courseId:String): SubmissionsResponse
 }
 
 ##############

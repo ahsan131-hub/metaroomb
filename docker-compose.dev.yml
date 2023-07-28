@@ -13,11 +13,11 @@ services:
     env_file: .env.local
     environment:
       - PORT=27017
-      - MONGO_URL=mongodb+srv://metaroom55:metaroom786@cluster0.9uytw03.mongodb.net/?retryWrites=true&w=majority  
+      - MONGO_URL=MONGO_URL
     links:
-          - mongo
+      - mongo
     depends_on:
-      - mongo      
+      - mongo
     command: npm run dev
   mongo:
     container_name: mongo
@@ -26,7 +26,7 @@ services:
     volumes:
       - ./data:/data/db
     ports:
-      - '27017:27017'  
+      - "27017:27017"
 volumes:
   mongo-data:
     driver: local

@@ -1,0 +1,61 @@
+# graphql/Schema.js
+
+type QuizQuestion {
+  question: String!
+  options: [String!]!
+  correctAnswer: String!
+}
+
+type Quiz {
+  _id: ID!
+  courseId: ID!
+  title: String!
+  description: String!
+  startTime: String!
+    endTime: String!
+  questions: [QuizQuestion!]!
+  createdAt: String!
+  updatedAt: String!
+}
+
+input QuizQuestionInput {
+  question: String!
+  options: [String!]!
+  correctAnswer: String!
+}
+
+input CreateQuizInput {
+  courseId: ID!
+  title: String!
+  description: String!
+  startTime: String!
+    endTime: String!
+  questions: [QuizQuestionInput!]!
+}
+
+input UpdateQuizInput {
+  title: String
+  description: String
+  questions: [QuizQuestionInput]
+}
+
+
+type CreateQuizResponse{
+    response:Response
+    quiz:Quiz
+}
+
+type getQuizResponse{
+    response:Response
+    quizes:[Quiz]
+}
+
+type Mutation {
+  createQuiz(input: CreateQuizInput!): CreateQuizResponse
+#   updateQuiz(id: ID!, input: UpdateQuizInput!): Quiz
+#   deleteQuiz(id: ID!): Quiz
+}
+type Query {
+#   getQuiz(id: ID!): Quiz
+  getQuizesByCourseId(courseId:String): getQuizResponse
+}

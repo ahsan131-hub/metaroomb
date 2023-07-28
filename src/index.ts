@@ -11,16 +11,13 @@ dotenv.config();
 const server = new ApolloServer({
   typeDefs: loadFiles("**/typeDefs/*.{graphql,gql}"),
   resolvers,
-  nodeEnv:"development"
-
-
 });
 
 (async () => {
   try {
 
     await connection(
-      "mongodb+srv://metaroom55:metaroom786@cluster0.9uytw03.mongodb.net/?retryWrites=true&w=majority"
+    process.env.MONGO_URL as string,
     );
     console.log("Database is connected successfully...");
   } catch (error: any) {
@@ -36,7 +33,7 @@ const server = new ApolloServer({
       return {  user };
     },
 
-    listen: { port: 8000 },
+    listen: { port: 4000 },
   });
 
   console.log(`🚀  Server ready at: ${url}`);

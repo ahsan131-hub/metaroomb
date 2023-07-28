@@ -34,7 +34,7 @@ const schema = new Schema<ISubmission_d, SubmissionModel>(
       type: String,
       minlength: 0,
       maxlength: 1000,
-      required: true,
+      // required: true,
     },
     quizQuestions: [
       {
